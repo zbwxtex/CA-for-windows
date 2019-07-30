@@ -1,0 +1,110 @@
+<html>
+  <head>
+    <title>命令助手电脑版</title>
+    <meta charset="utf-8">
+    <style type="text/css">
+      .tab{border-radius: 15%}
+      .tab .tab_list{background-color: #E0E0E0;}
+      .tab .tab_list button{
+        background: white;
+        border-radius: 5px;
+        padding: 10px 20px;
+        margin: 10px;
+        transition: background-color 0.25s;
+        border: 1.5px solid white;
+        outline: none;
+      }
+      .tab .tab_list button:hover{background: #DDDDDD;}
+      .tab .tab_list div:hover{background: #FFFFFF;}
+      .tab .tab_content div{background-color: #FAFAFA; display: none;}
+      .tab .tab_content div div{display: block;}
+      .tab .tab_list #act_btn{background-color: #DFDFDF;}
+      .tab .tab_content #act_ctn{display: block;}
+    </style>
+  </head>
+  <body style="background-color: #F0F0F0; text-align: center;">
+    <div>
+      <img alt="Logo" src="icon.png" style="border-radius: 15%;width: 140px;height: 140px;">
+      <h1></h1>
+    </div>
+    <div id="loading"><font size="6">Loading...</font></div>
+    <div class="tab" style="display: none;">
+      <div class="tab_list">
+        <button id="act_btn">下载</button>
+        <button>新闻</button>
+        <button>源码</button>
+        <button>关于</button>
+        <button>群聊</button>
+      </div>
+      <h1></h1>
+      <div class="tab_content">
+        <div id="act_ctn"><iframe style="width: 100%;height: 60%;display: none" frameborder="no" src="https://gitee.com/xtex/command_assistant_for_windows/releases/Release3.0" id="download_frame" onload="download_onload()"></iframe><h1 id="download_loading">Loading...</h1></div>
+        <div>新闻</div>
+        <div><script src='https://gitee.com/xtex/ca_windows/widget_preview'></script></div>
+        <div>
+          <h1><font color=" #666666">关于</font> 命令助手电脑版</h1>
+          =====版权声明=====</br>
+          命令助手电脑版 (Command Assistant for windows) 版权所有 (C) 2017 - 2019 zbw工作室xtex</br>
+          本程序为自由软件；您可依据自由软件基金会所发表的GNU通用公共授权条款，对本程序再次发布和修改；无论您依据的是本授权的第三版，或（您可选的）任一日后发行的版本。</br>
+          本程序是基于使用目的而加以发布，然而不负任何担保责任；亦无对适售性或特定目的适用性所为的默示性担保。详情请参照GNU通用公共授权。</br>
+          您应已收到附随于本程序的GNU通用公共授权的副本；如果没有，请参照[http://www.gnu.org/licenses/]。</br>
+          =====隐私策略=====</br>
+          我们会通过YesAPI在一定范围之内做一些统计,但不会收集您的任何个人信息</br>
+          =====制作人员=====</br>
+          代码编写:zbw工作室xtex</br>
+          核心插件:zbw工作室xtex</br>
+          源码托管:码云Gitee</br>
+          </br>
+          命令助手Windows版（不含命令库和插件，含core核心插件） zbw工作室xtex版权所有</br>
+          Command Assistant Windows Edition (excluding command libraries and plug-ins, but including core core plug-ins) zbw Studio xtex Copyright All Rights Reserved 2018 - 2019</br>
+          我工作室(zbw工作室)保留对上述所有内容的最终解释权</br></br>
+          <div id="about_more"></div>
+        </div>
+        <div>
+          <table>
+            <ul>
+              <li><a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=2d584ce127fc73e670b2b9e1978759b019122847d9832a4eafae5e2df4a7a81c">工作室内测组</a></li>
+              <li><a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=3c65921eb26e1bf50c3532543329bcbd519e44cdce5026ac3cdfe5bf96adafd4">MCJE命令助手电脑版交流群</a></li>
+              <li><a target="_blank" href="//jq.qq.com/?_wv=1027&k=56zvKZs">MCBE命令助手反馈&审核</a></li>
+              <li><a target="_blank" href="//jq.qq.com/?_wv=1027&k=5ih75Pb">MCBE命令助手内测组</a></li>
+              <li><a target="_blank" href="//jq.qq.com/?_wv=1027&k=5w72Ss4">MCBE命令助手讨论区</a></li>
+            </ul>
+          </table>
+        </div> 
+      </div>
+    </div>
+    <script>
+      var btns = document.getElementsByTagName("button");
+      var cts = document.getElementsByTagName("div");
+      for(var i = 0;i < btns.length;i ++){
+        if(btns[i].parentElement == document.getElementsByClassName("tab_list")[0]){
+          btns[i].addEventListener("click",eval("()=>{tab_onclick(" + i + ")}"))
+        }
+      }
+      var ctns = [];
+      for(var i = 0;i < cts.length;i ++){
+        if(cts[i].parentElement == document.getElementsByClassName("tab_content")[0]){
+          ctns.push(cts[i])
+        }
+      }
+      function tab_onclick(i){
+        for(var int = 0;int < btns.length;int ++){
+          btns[int].id = "";
+          ctns[int].id = "";
+        }
+        btns[i].id = "act_btn"
+        ctns[i].id = "act_ctn"
+      }
+      function download_onload(){
+        document.getElementById("download_frame").style.display = "block";
+        document.getElementById("download_loading").style.display = "none";
+      }
+      var type = new URL(location.href).hostname
+      if(new URL(location.href).protocol == "file:") type = "本地文件系统"
+      if(type == "xtex.gitee.io") type = "码云"
+      document.getElementById("about_more").innerText = "本站托管于: " + type
+      document.getElementsByClassName("tab")[0].style.display = "block";
+      document.getElementById("loading").style.display = "none";
+    </script>
+  </body>
+</html>
