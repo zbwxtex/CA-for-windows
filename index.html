@@ -38,7 +38,7 @@
       </div>
       <h1></h1>
       <div class="tab_content">
-        <div id="act_ctn"><iframe style="width: 100%;height: 60%;display: none" frameborder="no" src="https://gitee.com/xtex/command_assistant_for_windows/releases/Release3.0" id="download_frame" onload="download_onload()"></iframe><h1 id="download_loading">Loading...</h1></div>
+        <div id="act_ctn"><iframe style="width: 100%;height: 60%;display: none" frameborder="no" src="https://gitee.com/xtex/ca_windows/releases" id="download_frame" onload="download_onload()"></iframe><h1 id="download_loading">Loading...</h1></div>
         <div>新闻</div>
         <div><script src='https://gitee.com/xtex/ca_windows/widget_preview'></script></div>
         <div>
@@ -101,7 +101,8 @@
       }
       var type = new URL(location.href).hostname
       if(new URL(location.href).protocol == "file:") type = "本地文件系统"
-      if(type == "xtex.gitee.io") type = "码云"
+      if(type == "xtex.gitee.io") type = "码云<font color='#ff0000'>(Warning: goto github!!!)</font>"
+      if(type == "zbwxtex.github.io") type = "GitHub"
       document.getElementById("about_more").innerText = "本站托管于: " + type
       document.getElementsByClassName("tab")[0].style.display = "block";
       document.getElementById("loading").style.display = "none";
